@@ -718,7 +718,7 @@ A jump table for the options with a short description can be found at |Q_op|.
 	further details see |arabic.txt|.
 
 			*'autoindent'* *'ai'* *'noautoindent'* *'noai'*
-'autoindent' 'ai'	boolean	(default off)
+'autoindent' 'ai'	boolean	(default on)
 			local to buffer
 	Copy indent from current line when starting a new line (typing <CR>
 	in Insert mode or when using the "o" or "O" command).  If you do not
@@ -737,7 +737,7 @@ A jump table for the options with a short description can be found at |Q_op|.
 	deleted indent; Vi puts the cursor somewhere in the deleted indent}.
 
 				 *'autoread'* *'ar'* *'noautoread'* *'noar'*
-'autoread' 'ar'		boolean	(default off)
+'autoread' 'ar'		boolean	(default on)
 			global or local to buffer |global-local|
 	When a file has been detected to have been changed outside of Vim and
 	it has not been changed inside of Vim, automatically read it again.
@@ -1529,7 +1529,7 @@ A jump table for the options with a short description can be found at |Q_op|.
 'compatible' 'cp'	Removed. |vim-differences| {Nvim}
 
 						*'complete'* *'cpt'* *E535*
-'complete' 'cpt'	string	(default: ".,w,b,u,t,i")
+'complete' 'cpt'	string	(default: ".,w,b,u,t")
 			local to buffer
 	This option specifies how keyword completion |ins-completion| works
 	when CTRL-P or CTRL-N are used.  It is also used for whole-line
@@ -2253,7 +2253,7 @@ A jump table for the options with a short description can be found at |Q_op|.
 	security reasons.
 
 					*'display'* *'dy'*
-'display' 'dy'		string	(default "")
+'display' 'dy'		string	(default "lastline", Vi default: "")
 			global
 	Change the way text is displayed.  This is comma separated list of
 	flags:
@@ -3539,7 +3539,7 @@ A jump table for the options with a short description can be found at |Q_op|.
 	See |highlight-default| for the default highlight groups.
 
 				 *'hlsearch'* *'hls'* *'nohlsearch'* *'nohls'*
-'hlsearch' 'hls'	boolean	(default off)
+'hlsearch' 'hls'	boolean	(default on)
 			global
 			{not available when compiled without the
 			|+extra_search| feature}
@@ -3785,10 +3785,8 @@ A jump table for the options with a short description can be found at |Q_op|.
 	evaluating 'includeexpr' |textlock|.
 
 				 *'incsearch'* *'is'* *'noincsearch'* *'nois'*
-'incsearch' 'is'	boolean	(default off)
+'incsearch' 'is'	boolean	(default on)
 			global
-			{not available when compiled without the
-			|+extra_search| features}
 	While typing a search command, show where the pattern, as it was typed
 	so far, matches.  The matched string is highlighted.  If the pattern
 	is invalid or not found, nothing is shown.  The screen will be updated
@@ -3797,10 +3795,9 @@ A jump table for the options with a short description can be found at |Q_op|.
 	original position when no match is found and when pressing <Esc>.  You
 	still need to finish the search command with <Enter> to move the
 	cursor to the match.
-	When compiled with the |+reltime| feature Vim only searches for about
-	half a second.  With a complicated pattern and/or a lot of text the
-	match may not be found.  This is to avoid that Vim hangs while you
-	are typing the pattern.
+	Vim only searches for about half a second.  With a complicated
+	pattern and/or a lot of text the match may not be found.  This is to
+	avoid that Vim hangs while you are typing the pattern.
 	The highlighting can be set with the 'i' flag in 'highlight'.
 	See also: 'hlsearch'.
 	CTRL-L can be used to add one character from after the current match
@@ -4123,7 +4120,7 @@ A jump table for the options with a short description can be found at |Q_op|.
 <	Warning: This deletes all menus that you defined yourself!
 
 					*'langnoremap'* *'lnr'*
-'langnoremap' 'lnr'	boolean (default off)
+'langnoremap' 'lnr'	boolean (default on)
 			global
 	When on, setting 'langmap' does not apply to characters resulting from
 	a mapping.  This basically means, if you noticed that setting
@@ -4528,7 +4525,7 @@ A jump table for the options with a short description can be found at |Q_op|.
 	listing continues until finished.
 
 						*'mouse'* *E538*
-'mouse'			string	(default "", "a" for GUI, MS-DOS and Win32)
+'mouse'			string	(default "a")
 			global
 
 	Enable the use of the mouse.  Only works for certain terminals.
@@ -5409,10 +5406,10 @@ A jump table for the options with a short description can be found at |Q_op|.
 
 						*'sessionoptions'* *'ssop'*
 'sessionoptions' 'ssop'	string	(default: "blank,buffers,curdir,folds,
+					       help,tabpages,winsize"
+				 Vi default: "blank,buffers,curdir,folds,
 					       help,options,tabpages,winsize")
 			global
-			{not available when compiled without the |+mksession|
-			feature}
 	Changes the effect of the |:mksession| command.  It is a comma
 	separated list of words.  Each word enables saving and restoring
 	something:
@@ -5862,7 +5859,7 @@ A jump table for the options with a short description can be found at |Q_op|.
 	NOTE: When 'paste' is set smart indenting is disabled.
 
 				 *'smarttab'* *'sta'* *'nosmarttab'* *'nosta'*
-'smarttab' 'sta'	boolean	(default off)
+'smarttab' 'sta'	boolean	(default on)
 			global
 	When on, a <Tab> in front of a line inserts blanks according to
 	'shiftwidth'.  'tabstop' or 'softtabstop' is used in other places.  A
@@ -6385,7 +6382,7 @@ A jump table for the options with a short description can be found at |Q_op|.
 
 
 						*'tabpagemax'* *'tpm'*
-'tabpagemax' 'tpm'	number	(default 10)
+'tabpagemax' 'tpm'	number	(default 50)
 			global
 			{not available when compiled without the |+windows|
 			feature}
@@ -6900,8 +6897,8 @@ A jump table for the options with a short description can be found at |Q_op|.
 
 				*'viminfo'* *'vi'* *E526* *E527* *E528*
 'viminfo' 'vi'		string	(Vim default for
-				   Win32:  '100,<50,s10,h,rA:,rB:
-				   others: '100,<50,s10,h
+				   Win32:  '!,100,<50,s10,h,rA:,rB:
+				   others: '!,100,<50,s10,h
 				 Vi default: "")
 			global
 			{not available when compiled without the |+viminfo|

@@ -7,8 +7,7 @@ export SHELL := sh
 VIMPROG := ../../../build/bin/nvim
 SCRIPTSOURCE := ../../../runtime
 
-SCRIPTS := test_autoformat_join.out                                    \
-           test_eval.out                                               \
+SCRIPTS := test_eval.out                                               \
                                    test8.out               test10.out  \
            test11.out  test12.out  test13.out  test14.out              \
                        test17.out                                      \
@@ -20,18 +19,16 @@ SCRIPTS := test_autoformat_join.out                                    \
            test46.out  test47.out  test48.out  test49.out              \
                        test52.out  test53.out              test55.out  \
                        test57.out  test58.out  test59.out              \
-           test61.out  test62.out  test63.out  test64.out              \
+                       test62.out  test63.out  test64.out              \
                                    test68.out  test69.out              \
-           test71.out              test73.out  test74.out              \
+           test71.out              test73.out                          \
                                                test79.out  test80.out  \
                                    test83.out                          \
            test86.out  test87.out  test88.out                          \
            test_listlbr.out                                            \
            test_breakindent.out                                        \
-           test_argument_count.out                                     \
            test_close_count.out                                        \
            test_command_count.out                                      \
-           test_argument_0count.out
 
 SCRIPTS_GUI := test16.out
 
@@ -128,15 +125,6 @@ test1.out: .gdbinit test1.in
 	# a second, fall back to a second if it fails.
 	@-/bin/sh -c "sleep .2 > /dev/null 2>&1 || sleep 1"
 	$(RUN_VIM) $*.in
-
-	# For flaky tests retry one time.
-	@/bin/sh -c "if test -f test.out -a $* = test61; then \
-	                 if diff test.out $*.ok; then         \
-	                     echo flaky test ok first time;   \
-	                 else rm -rf $*.failed $(RM_ON_RUN);  \
-	                     $(RUN_VIM) $*.in;                \
-	                 fi;                                  \
-	             fi"
 
 	# Check if the test.out file matches test.ok.
 	@/bin/sh -c "if test -f test.out; then                \

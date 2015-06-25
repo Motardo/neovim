@@ -412,12 +412,12 @@ static vimoption_T
   {"autochdir",  "acd",   P_BOOL|P_VI_DEF,
    (char_u *)&p_acd, PV_NONE,
    {(char_u *)FALSE, (char_u *)0L} SCRIPTID_INIT},
-  {"autoindent",  "ai",   P_BOOL|P_VI_DEF,
+  {"autoindent",  "ai",   P_BOOL,
    (char_u *)&p_ai, PV_AI,
-   {(char_u *)FALSE, (char_u *)0L} SCRIPTID_INIT},
-  {"autoread",    "ar",   P_BOOL|P_VI_DEF,
+   {(char_u *)FALSE, (char_u *)TRUE} SCRIPTID_INIT},
+  {"autoread",    "ar",   P_BOOL|P_VIM,
    (char_u *)&p_ar, PV_AR,
-   {(char_u *)FALSE, (char_u *)0L} SCRIPTID_INIT},
+   {(char_u *)FALSE, (char_u *)TRUE} SCRIPTID_INIT},
   {"autowrite",   "aw",   P_BOOL|P_VI_DEF,
    (char_u *)&p_aw, PV_NONE,
    {(char_u *)FALSE, (char_u *)0L} SCRIPTID_INIT},
@@ -553,9 +553,9 @@ static vimoption_T
   {"compatible",  "cp",   P_BOOL|P_RALL,
    (char_u *)&p_force_off, PV_NONE,
    {(char_u *)TRUE, (char_u *)FALSE} SCRIPTID_INIT},
-  {"complete",    "cpt",  P_STRING|P_ALLOCED|P_VI_DEF|P_COMMA|P_NODUP,
+  {"complete",    "cpt",  P_STRING|P_ALLOCED|P_COMMA|P_NODUP,
    (char_u *)&p_cpt, PV_CPT,
-   {(char_u *)".,w,b,u,t,i", (char_u *)0L}
+   {(char_u *)".,w,b,u,t,i", (char_u *)".,w,b,u,t"}
    SCRIPTID_INIT},
   {"concealcursor","cocu", P_STRING|P_ALLOCED|P_RWIN|P_VI_DEF,
    VAR_WIN, PV_COCU,
@@ -645,9 +645,9 @@ static vimoption_T
   {"directory",   "dir",  P_STRING|P_EXPAND|P_VI_DEF|P_COMMA|P_NODUP|P_SECURE,
    (char_u *)&p_dir, PV_NONE,
    {(char_u *)DFLT_DIR, (char_u *)0L} SCRIPTID_INIT},
-  {"display",     "dy",   P_STRING|P_VI_DEF|P_COMMA|P_RALL|P_NODUP,
+  {"display",     "dy",   P_STRING|P_VIM|P_COMMA|P_RALL|P_NODUP,
    (char_u *)&p_dy, PV_NONE,
-   {(char_u *)"", (char_u *)0L} SCRIPTID_INIT},
+   {(char_u *)"", (char_u *)"lastline"} SCRIPTID_INIT},
   {"eadirection", "ead",  P_STRING|P_VI_DEF,
    (char_u *)&p_ead, PV_NONE,
    {(char_u *)"both", (char_u *)0L}
@@ -880,9 +880,9 @@ static vimoption_T
   {"hkmapp",      "hkp",  P_BOOL|P_VI_DEF|P_VIM,
    (char_u *)&p_hkmapp, PV_NONE,
    {(char_u *)FALSE, (char_u *)0L} SCRIPTID_INIT},
-  {"hlsearch",    "hls",  P_BOOL|P_VI_DEF|P_VIM|P_RALL,
+  {"hlsearch",    "hls",  P_BOOL|P_VIM|P_RALL,
    (char_u *)&p_hls, PV_NONE,
-   {(char_u *)FALSE, (char_u *)0L} SCRIPTID_INIT},
+   {(char_u *)FALSE, (char_u *)TRUE} SCRIPTID_INIT},
   {"icon",        NULL,   P_BOOL|P_VI_DEF,
    (char_u *)&p_icon, PV_NONE,
    {(char_u *)FALSE, (char_u *)0L} SCRIPTID_INIT},
@@ -934,9 +934,9 @@ static vimoption_T
    (char_u *)&p_inex, PV_INEX,
    {(char_u *)"", (char_u *)0L}
    SCRIPTID_INIT},
-  {"incsearch",   "is",   P_BOOL|P_VI_DEF|P_VIM,
+  {"incsearch",   "is",   P_BOOL|P_VIM,
    (char_u *)&p_is, PV_NONE,
-   {(char_u *)FALSE, (char_u *)0L} SCRIPTID_INIT},
+   {(char_u *)FALSE, (char_u *)TRUE} SCRIPTID_INIT},
   {"indentexpr", "inde",  P_STRING|P_ALLOCED|P_VI_DEF|P_VIM,
    (char_u *)&p_inde, PV_INDE,
    {(char_u *)"", (char_u *)0L}
@@ -1013,9 +1013,9 @@ static vimoption_T
   {"langmenu",    "lm",   P_STRING|P_VI_DEF|P_NFNAME,
    (char_u *)&p_lm, PV_NONE,
    {(char_u *)"", (char_u *)0L} SCRIPTID_INIT},
-  {"langnoremap", "lnr",  P_BOOL|P_VI_DEF,
+  {"langnoremap", "lnr",  P_BOOL,
    (char_u *)&p_lnr, PV_NONE,
-   {(char_u *)FALSE, (char_u *)0L} SCRIPTID_INIT},
+   {(char_u *)FALSE, (char_u *)TRUE} SCRIPTID_INIT},
   {"laststatus",  "ls",   P_NUM|P_VI_DEF|P_RALL,
    (char_u *)&p_ls, PV_NONE,
    {(char_u *)1L, (char_u *)0L} SCRIPTID_INIT},
@@ -1111,11 +1111,11 @@ static vimoption_T
   {"more",        NULL,   P_BOOL|P_VIM,
    (char_u *)&p_more, PV_NONE,
    {(char_u *)FALSE, (char_u *)TRUE} SCRIPTID_INIT},
-  {"mouse",       NULL,   P_STRING|P_VI_DEF|P_FLAGLIST,
+  {"mouse",       NULL,   P_STRING|P_FLAGLIST,
    (char_u *)&p_mouse, PV_NONE,
    {
      (char_u *)"",
-     (char_u *)0L
+     (char_u *)"a"
    } SCRIPTID_INIT},
   {"mousefocus",   "mousef", P_BOOL|P_VI_DEF,
    (char_u *)NULL, PV_NONE,
@@ -1305,10 +1305,10 @@ static vimoption_T
   {"selectmode",  "slm",  P_STRING|P_VI_DEF|P_COMMA|P_NODUP,
    (char_u *)&p_slm, PV_NONE,
    {(char_u *)"", (char_u *)0L} SCRIPTID_INIT},
-  {"sessionoptions", "ssop", P_STRING|P_VI_DEF|P_COMMA|P_NODUP,
+  {"sessionoptions", "ssop", P_STRING|P_VIM|P_COMMA|P_NODUP,
    (char_u *)&p_ssop, PV_NONE,
    {(char_u *)"blank,buffers,curdir,folds,help,options,tabpages,winsize",
-    (char_u *)0L}
+    (char_u *)"blank,buffers,curdir,folds,help,tabpages,winsize"}
    SCRIPTID_INIT},
   {"shell",       "sh",   P_STRING|P_EXPAND|P_VI_DEF|P_SECURE,
    (char_u *)&p_sh, PV_NONE,
@@ -1407,9 +1407,9 @@ static vimoption_T
   {"smartindent", "si",   P_BOOL|P_VI_DEF|P_VIM,
    (char_u *)&p_si, PV_SI,
    {(char_u *)FALSE, (char_u *)0L} SCRIPTID_INIT},
-  {"smarttab",    "sta",  P_BOOL|P_VI_DEF|P_VIM,
+  {"smarttab",    "sta",  P_BOOL|P_VIM,
    (char_u *)&p_sta, PV_NONE,
-   {(char_u *)FALSE, (char_u *)0L} SCRIPTID_INIT},
+   {(char_u *)FALSE, (char_u *)TRUE} SCRIPTID_INIT},
   {"softtabstop", "sts",  P_NUM|P_VI_DEF|P_VIM,
    (char_u *)&p_sts, PV_STS,
    {(char_u *)0L, (char_u *)0L} SCRIPTID_INIT},
@@ -1472,9 +1472,9 @@ static vimoption_T
   {"tabline",     "tal",  P_STRING|P_VI_DEF|P_RALL,
    (char_u *)&p_tal, PV_NONE,
    {(char_u *)"", (char_u *)0L} SCRIPTID_INIT},
-  {"tabpagemax",  "tpm",  P_NUM|P_VI_DEF,
+  {"tabpagemax",  "tpm",  P_NUM|P_VIM,
    (char_u *)&p_tpm, PV_NONE,
-   {(char_u *)10L, (char_u *)0L} SCRIPTID_INIT},
+   {(char_u *)10L, (char_u *)50L} SCRIPTID_INIT},
   {"tabstop",     "ts",   P_NUM|P_VI_DEF|P_RBUF,
    (char_u *)&p_ts, PV_TS,
    {(char_u *)8L, (char_u *)0L} SCRIPTID_INIT},
@@ -1587,7 +1587,7 @@ static vimoption_T
    SCRIPTID_INIT},
   {"viminfo",     "vi",   P_STRING|P_COMMA|P_NODUP|P_SECURE,
    (char_u *)&p_viminfo, PV_NONE,
-   {(char_u *)"", (char_u *)"'100,<50,s10,h"}
+   {(char_u *)"", (char_u *)"!,'100,<50,s10,h"}
    SCRIPTID_INIT},
   {"virtualedit", "ve",   P_STRING|P_COMMA|P_NODUP|P_VI_DEF|P_VIM|P_CURSWANT,
    (char_u *)&p_ve, PV_NONE,
@@ -3710,6 +3710,7 @@ did_set_string_option (
         ml_setflags(curbuf);
       }
     }
+
     if (errmsg == NULL) {
       /* canonize the value, so that STRCMP() can be used on it */
       p = enc_canonize(*varp);
@@ -3721,13 +3722,15 @@ did_set_string_option (
       }
     }
 
-
     if (errmsg == NULL) {
       /* When 'keymap' is used and 'encoding' changes, reload the keymap
        * (with another encoding). */
       if (varp == &p_enc && *curbuf->b_p_keymap != NUL)
         (void)keymap_init();
 
+      if (varp == &p_enc) {
+        ui_update_encoding();
+      }
     }
   } else if (varp == &p_penc) {
     /* Canonize printencoding if VIM standard one */
